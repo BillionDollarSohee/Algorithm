@@ -23,7 +23,7 @@ class Solution {
             if (n % i == 0) {
                 count++; // i는 약수
                 if (i != n / i) {
-                    count++; // 짝인 약수 (제곱수면 중복 제거)
+                    count++; // 짝인 약수 (제곱수면 중복은 세지않음)
                 }
             }
         }
