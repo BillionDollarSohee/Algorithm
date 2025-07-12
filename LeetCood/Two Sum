@@ -1,0 +1,16 @@
+```kotlin
+class Solution {
+    fun twoSum(nums: IntArray, target: Int): IntArray {
+        val numsMap: MutableMap<Int, Int> = mutableMapOf()
+
+        for ((i,num) in nums.withIndex()) {
+            if(numsMap.containsKey(target - num)) {
+                return intArrayOf(numsMap[target - num]!!, i)
+            }
+            // 정답이 아니므로 다음 비교를 위해 인덱스를 맵에 저장
+            numsMap[num] = i
+        }
+        return intArrayOf(0, 0)
+    }
+}
+```
