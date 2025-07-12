@@ -1,4 +1,4 @@
-```kotlin
+// kotlin
 class Solution {
     fun twoSum(nums: IntArray, target: Int): IntArray {
         val numsMap: MutableMap<Int, Int> = mutableMapOf()
@@ -13,4 +13,19 @@ class Solution {
         return intArrayOf(0, 0)
     }
 }
-```
+
+// java
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        
+        for(int i = 0; i < nums.length; i++) {
+            for(int j = i+1; j < nums.length; j++) {
+                if(nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        //항상 정답이 존재하므로 널이 리턴되는 경우는 없음
+        return null;
+    }
+}
