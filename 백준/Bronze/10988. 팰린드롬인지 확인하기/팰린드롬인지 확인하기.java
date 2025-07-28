@@ -1,20 +1,23 @@
-import java.util.Scanner;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+class Main {
+    public static void main(String[] args) throws IOException{
 
-        String str = sc.nextLine();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String input = br.readLine();
         String reverse = "";
 
-        for (int i = str.length()-1; i >= 0; i--) {
-            reverse += String.valueOf(str.charAt(i));
+        for (int i = input.length()-1; i >= 0; i--) {
+            reverse += String.valueOf(input.charAt(i));
         }
 
-        if(reverse.equals(str)){
-            System.out.println(1);
+        if (input.equals(reverse)) {
+           System.out.println(1); 
         } else {
-            System.out.println(0);
+           System.out.println(0);  
         }
 
     }
