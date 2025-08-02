@@ -1,0 +1,59 @@
+[리트코드 819 - 가장 자주 나오는 단어](https://leetcode.com/problems/most-common-word/)
+
+금지된 단어를 제외하고, 가장 빈번하게 등장하는 단어를 출력하라. 대소문자를 구분하지 않으며 구두점 또한 무시한다.
+
+Input: paragraph = "Bob hit a ball, the hit BALL flew far after it was hit.", banned = ["hit"]
+Output: "ball"
+
+입력 값을 보면 `,`,`.`과같은 구두점이 존재한다. 아마`?`,`!`,`""` 등과 같은 부호들도 무시해야 한다.
+문제 1번에서는 문자와 숫자가 포함된 정규식을 사용했는데, 이번에는 문자만 필요하니 문자가 아닌것을 찾는 대문자 `W`(문자인것을 찾으려면 소문자 w)에 연속적인 값을 의미하는 `+`를 붙이고 그외에는 공백으로 치환하게 만드는 정규식`"\\W+", " "`를 통해 풀 예정이다. 역슬래시가 2개인 이유는 `replaceAll()` 에서 역슬래시는 한번더 붙여줘야하기 때문이다.
+
+금지된 단어를 처리할 때 사용할 `getOrDefault()`는 값이 없으면 기본값을 출력하고 값이 있으면 그 값을 출력하고 +1을 한 다음 다시 저장한다.
+
+해시맵에서 가장 큰 값을 찾을 때는 `Collections.max()`를 사용할 것이고 찾는 기준은 `Map.Entry.comparingByValue()`이다.
+
+```java
+class Solution {
+    public String mostCommonWord(String paragraph, String[] banned) {
+        // 금지어 목록이 String[]이므로 비교 메소드를 제공해주는 Set을 이용했다.
+        Set<String> ban = new HashSet<>(Arrays.asList(banned));
+        Map<String, Integer> count = new HashMap<>();
+
+        String[] word = paragraph.replaceAll("\\W+", " ").toLowerCase().split(" ");
+
+        for (String w : word) {
+            if (!ban.contains(w)) { // 금지된 단어가 아니면
+                count.put(w, count.getOrDefault(w, 0) + 1); // 기본값은 0으로 설정한 다음 + 1개
+            } 
+        }
+
+        return Collections.max(count.entrySet(), Map.Entry.comparingByValue()).getKey();
+    }
+}
+```
+
+![](https://velog.velcdn.com/images/soheelog/post/71427bc0-1562-4843-98e3-e3eaa362da91/image.png)
+
+코틀린으로 풀면 아래와 같다.
+제약조건으로 null이 들어오지 않음이 확실하면 retrun문에서 `{ it.value }!!.key`로 써도 되지만 혹시 모르니까 `?.key ?: ""` 형태로 fallback을 주었다.
+
+```kotlin
+class Solution {
+    fun mostCommonWord(paragraph: String, banned: Array<String>): String {
+        val count = mutableMapOf<String, Int>()
+
+        val words = paragraph.replace("\\W+".toRegex(), " ")
+            .lowercase()
+            .trim()
+            .split(" ")
+
+        for (w in words) {
+            if (w.isNotEmpty() && !banned.contains(w)) {
+                count[w] = count.getOrDefault(w, 0) + 1
+            }
+        }
+
+        return count.maxByOrNull { it.value }?.key ?: ""
+    }
+}
+```
