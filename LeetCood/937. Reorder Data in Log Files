@@ -1,0 +1,128 @@
+[리트코드 937 - 로그 재정렬](https://leetcode.com/problems/reorder-data-in-log-files/)
+
+로그를 재정렬하라 기준은 다음과 같다.
+1. 로그의 앞부분은 식별자이며, 순서에 영향을 끼치지 않는다.
+2. 문자로 구성된 로그가 숫자로 구성된 로그보다 앞에 오며, 문자 로그는 사전순으로 한다.
+3. 문자가 동일할 경우 식별자 순으로 한다.
+4. 숫자 로그는 입력 순서대로 한다.
+
+Input: logs = ["dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero"]
+Output: ["let1 art can", "let3 art zero", "let2 own kit dig", "dig1 8 1 5 1", "dig2 3 6"]
+
+우선 문자와 숫자로 구분한 다음에 문자 로그를 정렬한 후, 숫자 로그를 합치려고 한다.
+`isDigit()`로 문자가 숫자인지 판단하고, 문자 리스트는 `Collections.sort()`로 정렬하면 된다.
+`compareTo()`는 두 값을 비교해서 정렬 기준을 제공하는 메서드로 정렬이나 순서 비교에 쓰인다.
+compareTo()는 String 클래스가 구현한 메서드로 String 클래스는 `Comparable<String>` 인터페이스를 이미 구현하고 있어서 문자열끼리는 compareTo()를 통해 정렬 기준을 비교할 수 있지만, 기본 문자 정렬 방식이 아닌, 사용자 지정 정렬 기준(로그의 식별자 기준)으로 쓰기위해 오버라이드를 사용했다.
+`addAll()`을 통해 숫자 로그를 전부 합칠 수 있고, `toArray()`로 list를 배열로 변환했다.
+
+
+```java
+class Solution {
+    public String[] reorderLogFiles(String[] logs) {
+        List<String> letterList = new ArrayList<>();
+        List<String> numList = new ArrayList<>();
+
+        for (String e : logs) {
+            if (Character.isDigit(e.split(" ")[1].charAt(0))) {
+                numList.add(e);
+            } else {
+                letterList.add(e);
+            }
+        }
+
+        Collections.sort(letterList, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+            	// 식별자와 식별자 외의 부분으로 구분
+                String[] arr1 = s1.split(" ", 2);
+                String[] arr2 = s2.split(" ", 2);
+
+                int compared = arr1[1].compareTo(arr2[1]);
+                // 문자가 동일하면 식별자를 비교
+                if (compared == 0) {
+                    return arr1[0].compareTo(arr2[0]);
+                } else {
+                    return compared;
+                }
+            }
+        });
+
+        letterList.addAll(numList);
+        return letterList.toArray(new String[0]);
+    }
+}
+```
+
+위 코드도 정말 괜찮은 코드지만 Collections부분을 람다식을 활용하면 가독성이 더 좋아질 것이다.
+
+```java
+class Solution {
+    public String[] reorderLogFiles(String[] logs) {
+         List<String> letterList = new ArrayList<>();
+        List<String> numList = new ArrayList<>();
+
+        for (String e : logs) {
+            if (Character.isDigit(e.split(" ")[1].charAt(0))) {
+                numList.add(e);
+            } else {
+                letterList.add(e);
+            }
+        }
+
+        letterList.sort((s1, s2) -> {
+        	// 식별자와 식별자 외의 부분으로 구분
+            String[] arr1 = s1.split(" ", 2);
+            String[] arr2 = s2.split(" ", 2);
+
+            int compared = arr1[1].compareTo(arr2[1]);
+            
+            // 문자가 동일하면 식별자를 비교 
+            if (compared == 0) {
+                return arr1[0].compareTo(arr2[0]);
+            } else {
+                return compared;
+            }
+        });
+
+        letterList.addAll(numList);
+        return letterList.toArray(new String[0]);
+    }
+}
+```
+
+![](https://velog.velcdn.com/images/soheelog/post/d31d412a-5345-433c-b5f2-3ed782e24bef/image.png)
+
+코틀린 코드도 살펴보자.
+
+```kotlin
+class Solution {
+    fun reorderLogFiles(logs: Array<String>): Array<String> {
+        val letterList = mutableListOf<String>()
+        val numList = mutableListOf<String>()
+
+        for (e in logs) {
+            if (e.split(" ")[1][0].isDigit()) {
+                numList.add(e)
+            } else {
+                letterList.add(e)
+            }
+        }
+
+        letterList.sortWith(Comparator { s1, s2 ->
+            val arr1 = s1.split(" ", limit = 2)
+            val arr2 = s2.split(" ", limit = 2)
+
+            val compared = arr1[1].compareTo(arr2[1])
+            if (compared == 0) {
+                arr1[0].compareTo(arr2[0])
+            } else {
+                compared
+            }
+        })
+
+        letterList.addAll(numList)
+        return letterList.toTypedArray()
+    }
+}
+
+```
