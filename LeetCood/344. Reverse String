@@ -1,0 +1,34 @@
+```java
+class Solution {
+    public void reverseString(char[] s) {
+        int start = 0;
+        int end = s.length -1;
+
+        while (start < end) {
+            char temporary = s[start]; // 임시 변수
+            s[start] = s[end];
+            s[end] = temporary;
+
+            start++;
+            end--;
+        }
+    }
+}
+
+
+// 코틀린
+class Solution {
+    fun reverseString(s: CharArray): Unit {
+        var start = 0
+        var end = s.size - 1
+
+        while (start < end) {
+            s[start] = s[end].also { s[end] = s[start] }
+
+            start++
+            end-- 
+        }
+
+    }
+}
+```
