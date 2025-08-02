@@ -1,38 +1,24 @@
 class Solution {
     public int solution(String s) {
-        int answer = 0;
         String str = "";
-        String current = "";
-        String[] arr = s.split("");
         String[] num = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
         
-        for(int i = 0; i < arr.length; i++) {
-            if(isInteger(arr[i])) {
-                str += arr[i];
+        String strNum = "";
+        for (int i = 0; i < s.length(); i++) {
+            char current = s.charAt(i);
+            if (Character.isDigit(current)) {
+                str += current;
             } else {
-                current += arr[i];
-                for(int j = 0; j < num.length; j++) {
-                    if(current.equals(num[j])) {
-                        str += Integer.toString(j);
-                        current = "";
+                strNum += current;
+                for (int j = 0; j < 10; j++) {
+                    if (num[j].equals(strNum)) {
+                        str += j;
+                        strNum = ""; 
                         break;
                     }
                 }
             }
         }
-
-        answer = Integer.parseInt(str);
-        return answer;
+        return Integer.parseInt(str);
     }
-
-
-    public static Boolean isInteger(String strValue) {
-        try {
-          Integer.parseInt(strValue);
-          return true;
-        } catch (NumberFormatException ex) {
-          return false;
-        }
-    }
-    
 }
