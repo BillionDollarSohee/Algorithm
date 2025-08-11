@@ -1,0 +1,25 @@
+[리트코드 225. - 큐를 이용해서 스택 구](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+
+문제 : 큐를 이용해 다음 연산을 지원하는 스택을 구현하라
+- push(x) : 엘리먼트 x를 스택에 삽입한다.
+- pop() : 스택의 첫 번째 엘리먼트를 삭제한다.
+- top() : 스택의 첫 번째 엘리먼트를 가져온다.
+- empty() : 스택이 비어있는지 확인한다.
+
+```java
+해당 스택 사용 예는 다음과 같다.
+
+MyStack stack = new MyStack();
+
+stack.push(1);
+stack.push(2);
+stack.push(3);
+stack.top();   // 3
+stack.pop();   // 3
+stack.empty(); // false
+```
+
+## 자바 풀이. push()할 때 큐를 이용해 재정렬하기
+
+
+## 코틀린 풀이
