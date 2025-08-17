@@ -1,10 +1,15 @@
 class Solution {
     public int[] solution(long n) {
-        String[] strN = Long.toString(n).split("");
-        int[] answer = new int[strN.length];
-        for(int i = 0; i < strN.length; i++) {
-            answer[answer.length-i-1]= Integer.parseInt(strN[i]);
+        String s = String.valueOf(n);
+        int[] answer = new int[s.length()];
+        
+        int index = 0;
+        for(int i = s.length() - 1; i >= 0; i --) {
+            answer[index] = Character.getNumericValue(s.charAt(i));
+            index++;
         }
+        
+
         return answer;
     }
 }
