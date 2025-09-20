@@ -1,55 +1,40 @@
+import java.util.*;
 class Solution {
     public int solution(String dartResult) {
-        int[] score = new int[3];
-        int turn = -1; 
-        
-        for (int i = 0; i < dartResult.length();) {
-            char currentChar = dartResult.charAt(i);
-
-            if (Character.isDigit(currentChar)) {
-                turn++;
-                int start = i;
-                
-                // 점수가 10이상의 경우
-                while (i + 1 < dartResult.length() && Character.isDigit(dartResult.charAt(i + 1))) {
+        Stack<Integer> stack = new Stack<>();
+        int sum = 0;
+        for (int i = 0; i < dartResult.length(); ++i) {
+            char c = dartResult.charAt(i);
+            if (Character.isDigit(c)) {
+                sum = (c - '0');
+                if (sum == 1 && i < dartResult.length() - 1 && dartResult.charAt(i + 1) == '0') {
+                    sum = 10;
                     i++;
                 }
-                
-                String numberStr = dartResult.substring(start, i + 1);
-                score[turn] = Integer.parseInt(numberStr);
-                
-                i++;
+                stack.push(sum);
             } else {
-                switch (currentChar) {
-                    case 'S':
-                        score[turn] = (int) Math.pow(score[turn], 1);
-                        break;
-                    case 'D':
-                        score[turn] = (int) Math.pow(score[turn], 2);
-                        break;
-                    case 'T':
-                        score[turn] = (int) Math.pow(score[turn], 3);
-                        break;
-                    case '*':
-                        score[turn] *= 2;
-                        if (turn > 0) {
-                            score[turn - 1] *= 2;
-                        }
-                        break;
-                    case '#':
-                        score[turn] *= -1;
-                        break;
+                int prev = stack.pop();
+                if (c == 'D') {
+                    prev *= prev;
+                } else if (c == 'T') {
+                    prev = prev * prev * prev;
+                } else if (c == '*') {
+                    if (!stack.isEmpty()) {
+                        int val = stack.pop() * 2;
+                        stack.push(val);
+                    }
+                    prev *= 2;
+                } else if (c == '#') {
+                    prev *= (-1);
                 }
-                
-                i++; // 다음 점수로 이동
+                // System.out.println(prev);
+                stack.push(prev);
             }
         }
-        
         int totalScore = 0;
-        for (int i = 0; i < 3; i++) {
-            totalScore += score[i];
+        while (!stack.isEmpty()) {
+            totalScore += stack.pop();
         }
-        
         return totalScore;
     }
 }
