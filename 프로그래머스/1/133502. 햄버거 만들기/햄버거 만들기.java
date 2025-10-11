@@ -1,18 +1,16 @@
 class Solution {
     public int solution(int[] ingredient) {
+        int[] stack = new int[ingredient.length];
+        int sp = 0;
         int answer = 0;
-        StringBuilder sb = new StringBuilder();
-
-        for (int ing : ingredient) {
-            sb.append(ing);
-
-            if (sb.length() >= 4) {
-                // 뒤에서 4글자 뽑기
-                if (sb.substring(sb.length() - 4).equals("1231")) {
-                    answer++;
-                    // 햄버거 만든 부분 제거(뒤에서 4글자 삭제)
-                    sb.delete(sb.length() - 4, sb.length());
-                }
+        for (int i : ingredient) {
+            stack[sp++] = i;
+            if (sp >= 4 && stack[sp - 1] == 1
+                && stack[sp - 2] == 3
+                && stack[sp - 3] == 2
+                && stack[sp - 4] == 1) {
+                sp -= 4;
+                answer++;
             }
         }
         return answer;
