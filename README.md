@@ -5,7 +5,7 @@ This is a auto push repository for Baekjoon Online Judge created with [BaekjoonH
 Baekjoon / LeetCode / Programmers 문제를 꾸준히 풀이하기
 1일 1알고리즘 화이팅 
 
-[![GitHub Streak](https://streak-stats.demolab.com?user=BillionDollarSohee&theme=dark&date_format=M%20j%5B%2C%20Y%5D)](https://git.io/streak-stats)
+![GitHub Streak](https://streak-stats.demolab.com?user=BillionDollarSohee&theme=dark)
 
 [![Sohee's GitHub stats](https://github-readme-stats.vercel.app/api?username=BillionDollarSohee&show_icons=true&theme=default)](https://github.com/anuraghazra/github-readme-stats)
 
