@@ -4,6 +4,6 @@ This is a auto push repository for Baekjoon Online Judge created with [BaekjoonH
 
 [![GitHub Streak](https://streak-stats.demolab.com?user=BillionDollarSohee&theme=dark)](https://git.io/streak-stats)
 
-[![Sohee's GitHub stats](https://github-readme-stats.vercel.app/api?username=BillionDollarSohee&show_icons=true&theme=dark)](https://github.com/anuraghazra/github-readme-stats)
+[![Sohee's GitHub stats](https://github-readme-stats.vercel.app/api?username=BillionDollarSohee&show_icons=true&theme=default)](https://github.com/anuraghazra/github-readme-stats)
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=BillionDollarSohee&layout=compact&theme=dark)](https://github.com/anuraghazra/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=BillionDollarSohee&layout=compact&theme=default)](https://github.com/anuraghazra/github-readme-stats)
