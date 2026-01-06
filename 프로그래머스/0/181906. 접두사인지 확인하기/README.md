@@ -1,10 +1,10 @@
 # [level 0] 접두사인지 확인하기 - 181906 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181906?language=python3) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181906?language=java) 
 
 ### 성능 요약
 
-메모리: 9.14 MB, 시간: 0.00 ms
+메모리: 86.1 MB, 시간: 0.04 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2026년 01월 06일 23:24:27
+2026년 01월 06일 23:27:18
 
 ### 문제 설명
 
