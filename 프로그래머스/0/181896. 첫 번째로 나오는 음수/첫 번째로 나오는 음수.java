@@ -1,0 +1,11 @@
+class Solution {
+    public int solution(int[] num_list) {
+        for (int i = 0; i < num_list.length; i++) {
+            if (num_list[i] < 0) {
+                return i;
+            }
+        }
+        // 음수가 없으면 -1 반환
+        return -1;
+    }
+}
